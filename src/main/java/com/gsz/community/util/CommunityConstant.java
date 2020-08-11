@@ -12,4 +12,6 @@ public interface CommunityConstant {
     int ENTITY_TYPE_POST = 1;
     //评论
     int ENTITY_TYPE_COMMENT = 2;
+    //用户
+    int ENTITY_TYPE_USER = 3;
 }
