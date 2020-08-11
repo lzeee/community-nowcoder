@@ -6,6 +6,7 @@ import com.gsz.community.entity.Page;
 import com.gsz.community.entity.User;
 import com.gsz.community.service.CommentService;
 import com.gsz.community.service.DiscussPostService;
+import com.gsz.community.service.LikeService;
 import com.gsz.community.service.UserService;
 import com.gsz.community.util.CommunityConstant;
 import com.gsz.community.util.CommunityUtil;
@@ -36,6 +37,9 @@ public class DisscussPostController implements CommunityConstant {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private LikeService likeService;
+
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     @ResponseBody
     public String addDisscussPost(String title, String content){
@@ -63,6 +67,15 @@ public class DisscussPostController implements CommunityConstant {
         // 帖子信息中缺少用户的信息，只有id
         User user = userService.findUserById(discussPost.getUserId());
         model.addAttribute("user", user);
+        //帖子的赞
+        //点赞数量
+        long likeCount = likeService.findEntityLikeCount(ENTITY_TYPE_POST, discussPostId);
+        model.addAttribute("likeCount", likeCount);
+        //当前用户点赞状态
+        int likeStatus =  hostHolder.getUser() == null ? 0 : likeService.findEntityLikeStatus(hostHolder.getUser().getId(), ENTITY_TYPE_POST, discussPostId);
+        model.addAttribute("likeStatus", likeStatus);
+
+
         //评论信息
         //分页信息
         page.setLimit(5);
@@ -76,10 +89,19 @@ public class DisscussPostController implements CommunityConstant {
             for(Comment comment: commentList){
                 Map<String, Object> commentVo = new HashMap<>();
                 // 一级评论
-                // 给帖子的评论的内容，comment和user
+                // 评论
                 commentVo.put("comment", comment);
+                // 作者
                 commentVo.put("user", userService.findUserById(comment.getUserId()));
-                // 二级评论
+                //帖子的赞
+                //点赞数量
+                likeCount = likeService.findEntityLikeCount(ENTITY_TYPE_COMMENT, comment.getId());
+                commentVo.put("likeCount", likeCount);
+                //当前用户点赞状态
+                likeStatus =  hostHolder.getUser() == null ? 0 : likeService.findEntityLikeStatus(hostHolder.getUser().getId(), ENTITY_TYPE_COMMENT, comment.getId());
+                commentVo.put("likeStatus", likeStatus);
+
+                // 二级评论，叫回复
                 // 给评论的评论，回复的列表
                 List<Comment> replyList = commentService.findCommentByEntity(ENTITY_TYPE_COMMENT, comment.getId(),0,Integer.MAX_VALUE);
                 // 回复的vo列表
@@ -87,8 +109,18 @@ public class DisscussPostController implements CommunityConstant {
                 if(replyList != null){
                     for(Comment reply: replyList){
                         Map<String, Object> replyVo = new HashMap<>();
+                        //回复的内容
                         replyVo.put("reply", reply);
+                        //回复的作者
                         replyVo.put("user", userService.findUserById(reply.getUserId()));
+
+                        //点赞数量
+                        likeCount = likeService.findEntityLikeCount(ENTITY_TYPE_COMMENT, reply.getId());
+                        replyVo.put("likeCount", likeCount);
+                        //当前用户点赞状态
+                        likeStatus =  hostHolder.getUser() == null ? 0 : likeService.findEntityLikeStatus(hostHolder.getUser().getId(), ENTITY_TYPE_COMMENT, reply.getId());
+                        replyVo.put("likeStatus", likeStatus);
+
                         //比一级回复多了一个回复的目标
                         User target = reply.getTargetId() == 0? null:userService.findUserById(reply.getTargetId());
                         replyVo.put("target", target);

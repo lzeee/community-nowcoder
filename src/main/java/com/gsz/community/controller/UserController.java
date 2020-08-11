@@ -2,6 +2,7 @@ package com.gsz.community.controller;
 
 import com.gsz.community.annotation.LoginRequired;
 import com.gsz.community.entity.User;
+import com.gsz.community.service.LikeService;
 import com.gsz.community.service.UserService;
 import com.gsz.community.util.CommunityUtil;
 import com.gsz.community.util.HostHolder;
@@ -40,6 +41,9 @@ public class UserController {
 
     @Autowired
     private HostHolder hostHolder;
+
+    @Autowired
+    private LikeService likeService;
 
     @LoginRequired
     @RequestMapping(path="/setting", method = RequestMethod.GET)
@@ -129,4 +133,21 @@ public class UserController {
         return "redirect:/index";
     }
 
+
+    //个人主页
+    //是别人访问还是自己访问呢？
+    @RequestMapping(path = "/profile/{userId}", method = RequestMethod.GET)
+    public String getProfilePage(@PathVariable("userId") int userId, Model model){
+        //要查询的用户
+        User user = userService.findUserById(userId);
+        if(user == null){
+            throw new RuntimeException("该用户不存在");
+        }
+        //用户的基本信息
+        model.addAttribute("user", user);
+        //点赞数量
+        int likeCount = likeService.findUserLikeCount(userId);
+        model.addAttribute("likeCount", likeCount);
+        return "/site/profile";
+    }
 }
