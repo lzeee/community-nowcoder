@@ -2,9 +2,11 @@ package com.gsz.community;
 
 import com.gsz.community.dao.DiscussPostMapper;
 import com.gsz.community.dao.LoginTicketMapper;
+import com.gsz.community.dao.MessageMapper;
 import com.gsz.community.dao.UserMapper;
 import com.gsz.community.entity.DiscussPost;
 import com.gsz.community.entity.LoginTicket;
+import com.gsz.community.entity.Message;
 import com.gsz.community.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +31,9 @@ public class MapperTests{
 
     @Autowired
     private LoginTicketMapper loginTicketMapper;
+
+    @Autowired
+    private MessageMapper messageMapper;
 
     @Test
     public void testSelectUser(){
@@ -66,6 +71,25 @@ public class MapperTests{
 
         loginTicket = loginTicketMapper.selectByTicket("abc");
         System.out.println(loginTicket);
+    }
+
+    @Test
+    public void testMessageMapper(){
+        List<Message> list = messageMapper.selectConversations(111,0,20);
+        for(Message m: list){
+            System.out.println(m);
+        }
+
+        System.out.println( messageMapper.selectConversationCount(111));
+
+        List<Message> list2 = messageMapper.selectLetters("111_112",0,10);
+        for(Message m: list2){
+            System.out.println(m);
+        }
+
+        System.out.println(messageMapper.selectLetterCount("111_112"));
+
+        System.out.println(messageMapper.selectUnreadLetterCount(131,"111_131"));
     }
 
 }

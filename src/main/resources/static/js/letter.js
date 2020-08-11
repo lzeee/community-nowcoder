@@ -4,11 +4,30 @@ $(function(){
 });
 
 function send_letter() {
+	//隐藏发送框
 	$("#sendModal").modal("hide");
-	$("#hintModal").modal("show");
-	setTimeout(function(){
-		$("#hintModal").modal("hide");
-	}, 2000);
+	//发送数据
+	var toName = $("#recipient-name").val();
+	var content = $("#message-text").val();
+	$.post(
+		"/letter/send",
+		{"toName":toName, "content":content},
+		function(data){
+			data = $.parseJSON(data);
+			if(data.code==0){
+				$("#hintBody").text("发送成功");
+			}else {
+				$("#hintBody").text(data.msg);
+			}
+			//显示提示框
+			$("#hintModal").modal("show");
+			setTimeout(function(){
+				$("#hintModal").modal("hide");
+				location.reload();
+			}, 2000);
+		}
+	);
+
 }
 
 function delete_msg() {
