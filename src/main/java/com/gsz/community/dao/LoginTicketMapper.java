@@ -4,6 +4,8 @@ import com.gsz.community.entity.LoginTicket;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
+@Deprecated
+//弃用
 public interface LoginTicketMapper {
     //增加一个ticket
     @Insert({

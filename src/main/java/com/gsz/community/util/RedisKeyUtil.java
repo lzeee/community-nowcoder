@@ -1,5 +1,7 @@
 package com.gsz.community.util;
 
+import javax.imageio.plugins.tiff.TIFFDirectory;
+
 public class RedisKeyUtil {
 
     private static final String SPLIT = ":";
@@ -8,6 +10,16 @@ public class RedisKeyUtil {
 
     private static final String PREFIX_FOLLOWEE = "followee";
     private static final String PREFIX_FOLLOWER = "follower";
+
+    //验证码前缀
+    private static final String PREFIX_KAPTCHA = "kaptcha";
+
+    //登录凭证
+    private static final String PREFIX_TICKET = "ticket";
+
+    //用户缓存
+    private static final String PREFIX_USER = "user";
+
 
     // 生成某个实体的赞的key
     // like:entity:entityType:entityId --> set(userId) 赞相当于set的size
@@ -36,4 +48,21 @@ public class RedisKeyUtil {
         return PREFIX_FOLLOWER + SPLIT + entityType + SPLIT + entityId;
     }
 
+    //验证码的key
+    public static String getKaptchaKey(String owner){
+        //验证码如何唯一标识呢？
+        //用一个凭证
+        return PREFIX_KAPTCHA + SPLIT + owner;
+
+    }
+
+    //登录凭证的key
+    public static String getTicketKey(String ticket){
+        return PREFIX_TICKET + SPLIT + ticket;
+    }
+
+    //用户的key
+    public static String getUserKey(int userId){
+        return PREFIX_USER + SPLIT + userId;
+    }
 }
