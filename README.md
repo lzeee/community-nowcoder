@@ -32,8 +32,37 @@
 统一处理异常、记录日志（AOP）
 
 #### Redis
+内存型数据库
+
 点赞、关注
+
 优化登录流程：验证码、登录凭证、缓存用户信息
+
+#### Kafka
+
+消息队列服务器
+
+评论/点赞/关注后，生产者消费者模式，发布通知
+
+kafka启动过程比较繁琐
+
+1.启动zookeeper
+
+bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+
+2.启动kafka
+
+bin\windows\kafka-server-start.bat config\server.properties
+
+3.新建主题
+
+bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+
+4.查看主题
+
+bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+
+服务打开之后就可以在springboot中调用
 
 ### 2.项目整体的架构
 

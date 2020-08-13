@@ -1,7 +1,9 @@
 package com.gsz.community.controller;
 
+import com.gsz.community.entity.Event;
 import com.gsz.community.entity.Page;
 import com.gsz.community.entity.User;
+import com.gsz.community.event.EventProducer;
 import com.gsz.community.service.FollowService;
 import com.gsz.community.service.UserService;
 import com.gsz.community.util.CommunityConstant;
@@ -30,6 +32,10 @@ public class FollowController implements CommunityConstant{
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EventProducer eventProducer;
+
+
     //关注是异步操作
     @RequestMapping(path = "/follow", method= RequestMethod.POST)
     @ResponseBody
@@ -38,7 +44,17 @@ public class FollowController implements CommunityConstant{
         User user = hostHolder.getUser();
         followService.follow(user.getId(),entityType, entityId);
 
+        // 触发关注事件
+        Event event = new Event()
+                .setTopic(TOPIC_FOLLOW)
+                .setUserId(user.getId())
+                .setEntityType(entityType)
+                .setEntityId(entityId)
+                .setEntityUserId(entityId);
+        eventProducer.fireEvent(event);
+
         return CommunityUtil.getJSONString(0,"已关注");
+
     }
 
     @RequestMapping(path = "/unfollow", method= RequestMethod.POST)
@@ -98,8 +114,6 @@ public class FollowController implements CommunityConstant{
         model.addAttribute("users",userList);
         return "/site/follower";
     }
-
-
 
     private boolean hasFollowed(int userId){
         if(hostHolder.getUser() == null){
