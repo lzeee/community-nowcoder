@@ -44,7 +44,7 @@
 
 评论/点赞/关注后，生产者消费者模式，发布通知
 
-kafka启动过程比较繁琐
+项目启动之前必须先启动kafka，而kafka启动过程比较繁琐
 
 1.启动zookeeper
 
@@ -63,6 +63,22 @@ bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replic
 bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
 
 服务打开之后就可以在springboot中调用
+
+#### ElasticSearch
+
+使用之前需要安装中文分词插件ik https://github.com/medcl/elasticsearch-analysis-ik
+
+服务启动之前需要启动ElasticSearch服务器
+
+Postman作为工具学习ElasticSearch的使用
+
+实现搜索引擎，通过关键词搜索
+
+发布帖子时，使用kafka将新的帖子同步到搜索引擎中
+
+搜索引擎的版本和JDK版本冲突
+https://blog.csdn.net/chentyit/article/details/101193838
+
 
 ### 2.项目整体的架构
 

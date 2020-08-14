@@ -1,9 +1,7 @@
 package com.gsz.community.controller;
 
-import com.gsz.community.entity.Comment;
-import com.gsz.community.entity.DiscussPost;
-import com.gsz.community.entity.Page;
-import com.gsz.community.entity.User;
+import com.gsz.community.entity.*;
+import com.gsz.community.event.EventProducer;
 import com.gsz.community.service.CommentService;
 import com.gsz.community.service.DiscussPostService;
 import com.gsz.community.service.LikeService;
@@ -40,6 +38,9 @@ public class DisscussPostController implements CommunityConstant {
     @Autowired
     private LikeService likeService;
 
+    @Autowired
+    private EventProducer eventProducer;
+
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     @ResponseBody
     public String addDisscussPost(String title, String content){
@@ -53,6 +54,15 @@ public class DisscussPostController implements CommunityConstant {
         post.setContent(content);
         post.setCreateTime(new Date());
         discussPostService.addDiscussPost(post);
+
+        //发帖时
+        //将帖子也存到搜索引擎的服务器中
+        Event event = new Event()
+                .setTopic(TOPIC_PUBLISH)
+                .setUserId(user.getId())
+                .setEntityType(ENTITY_TYPE_POST)
+                .setEntityId(post.getId());
+        eventProducer.fireEvent(event);
 
         //报错的情况，将来统一处理
         return CommunityUtil.getJSONString(0,"发布成功");
