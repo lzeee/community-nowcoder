@@ -83,9 +83,11 @@ https://blog.csdn.net/chentyit/article/details/101193838
 #### 项目完善 
 spring security
 
-安全性、权限控制、管理员
+权限管理：管理员、版主、普通用户
 
-性能 
+功能管理：置顶、加精、删除
+
+性能
 
 ### 2.项目整体的架构
 

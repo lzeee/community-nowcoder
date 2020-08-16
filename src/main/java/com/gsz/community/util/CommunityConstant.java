@@ -24,6 +24,9 @@ public interface CommunityConstant {
     String TOPIC_FOLLOW = "follow";
     //发帖
     String TOPIC_PUBLISH = "publish";
+    //删帖
+    String TOPIC_DELETE = "delete";
+
 
     //系统用户id
     int SYSTEM_USERID = 1;
