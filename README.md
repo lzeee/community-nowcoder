@@ -87,6 +87,10 @@ spring security
 
 功能管理：置顶、加精、删除
 
+Redis
+
+UV DAU统计
+
 性能
 
 ### 2.项目整体的架构

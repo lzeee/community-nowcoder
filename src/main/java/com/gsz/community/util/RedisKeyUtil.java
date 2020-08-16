@@ -19,6 +19,9 @@ public class RedisKeyUtil {
     //用户缓存
     private static final String PREFIX_USER = "user";
 
+    private static final String PREFIX_UV = "uv";
+    private static final String PREFIX_DAU = "dau";
+
 
     // 生成某个实体的赞的key
     // like:entity:entityType:entityId --> set(userId) 赞相当于set的size
@@ -64,4 +67,23 @@ public class RedisKeyUtil {
     public static String getUserKey(int userId){
         return PREFIX_USER + SPLIT + userId;
     }
+
+    //单日uv的key
+    public static String getUVKey(String date){
+        return PREFIX_UV + SPLIT + date;
+    }
+
+    //区间uv的key
+    public static String getUVKey(String sdate, String edate){
+        return PREFIX_UV + SPLIT + sdate + SPLIT + edate;
+    }
+
+    public static String getDAUKey(String date){
+        return PREFIX_DAU + SPLIT + date;
+    }
+
+    public static String getDAUKey(String sdate, String edate){
+        return PREFIX_DAU + SPLIT + sdate + SPLIT + edate;
+    }
+
 }
