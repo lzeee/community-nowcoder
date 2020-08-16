@@ -22,12 +22,14 @@ public interface CommunityConstant {
     String TOPIC_LIKE = "like";
     //关注
     String TOPIC_FOLLOW = "follow";
-
     //发帖
     String TOPIC_PUBLISH = "publish";
-
 
     //系统用户id
     int SYSTEM_USERID = 1;
 
+    //用户权限
+    String AUTHORITY_USER = "user";
+    String AUTHORITY_ADMIN = "admin";
+    String AUTHORITY_MODERATOR = "moderator";
 }

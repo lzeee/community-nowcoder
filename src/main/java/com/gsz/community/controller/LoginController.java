@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -117,45 +118,45 @@ public class LoginController implements CommunityConstant {
         }
     }
 
-    @RequestMapping(path="/login", method=RequestMethod.POST)
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(String username, String password, String code, boolean rememberme,
-                        Model model, HttpServletResponse httpServletResponse,
-                        @CookieValue("kaptchaOwner") String kaptchaOwner){
-        //检查验证码
-        //String kaptcha = (String) session.getAttribute("kaptcha");
+                        Model model, /*HttpSession session, */HttpServletResponse response,
+                        @CookieValue("kaptchaOwner") String kaptchaOwner) {
+        // 检查验证码
+        // String kaptcha = (String) session.getAttribute("kaptcha");
         String kaptcha = null;
-        if(StringUtils.isNotBlank(kaptchaOwner)){
+        if (StringUtils.isNotBlank(kaptchaOwner)) {
             String redisKey = RedisKeyUtil.getKaptchaKey(kaptchaOwner);
-            kaptcha = (String)redisTemplate.opsForValue().get(redisKey);
+            kaptcha = (String) redisTemplate.opsForValue().get(redisKey);
         }
-        if(StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)){
-            model.addAttribute("codeMsg", "验证码不正确");
+
+        if (StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)) {
+            model.addAttribute("codeMsg", "验证码不正确!");
             return "/site/login";
         }
-        //检查账号,密码
-        //设置保存时间
+
+        // 检查账号,密码
         int expiredSeconds = rememberme ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS;
-        Map<String, Object> map = userService.login(username,password,expiredSeconds);
-        //登录成功
-        if(map.containsKey("ticket")){
+        Map<String, Object> map = userService.login(username, password, expiredSeconds);
+        if (map.containsKey("ticket")) {
             Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
             cookie.setPath("/");
             cookie.setMaxAge(expiredSeconds);
-            httpServletResponse.addCookie(cookie);
+            response.addCookie(cookie);
             return "redirect:/index";
-        }
-        //登录失败
-        else{
+        } else {
             model.addAttribute("usernameMsg", map.get("usernameMsg"));
             model.addAttribute("passwordMsg", map.get("passwordMsg"));
             return "/site/login";
         }
     }
 
-    @RequestMapping(path="/logout", method = RequestMethod.GET)
-    public String logout(@CookieValue("ticket")String ticket ){
+    @RequestMapping(path = "/logout", method = RequestMethod.GET)
+    public String logout(@CookieValue("ticket") String ticket) {
         userService.logout(ticket);
+        SecurityContextHolder.clearContext();
         return "redirect:/login";
     }
+
 
 }

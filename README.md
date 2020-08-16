@@ -80,8 +80,17 @@ Postman作为工具学习ElasticSearch的使用
 https://blog.csdn.net/chentyit/article/details/101193838
 
 
+#### 项目完善 
+spring security
+
+安全性、权限控制、管理员
+
+性能 
+
 ### 2.项目整体的架构
 
 
 ### 3.开发中遇到问题
-String ==判断相等
+String用==判断相等
+config类上忘写@Configuration注解
+utf-8写成urf-8
