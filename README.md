@@ -97,15 +97,16 @@ UV DAU统计
 
 ##### 性能提升
 
-增加缓存
+增加缓存 Caffeine，在查询帖子总数/查询帖子列表时，加入一级缓存
 
-压测工具
+压力测试 JMeter 使用缓存之前吞吐量100.5/sec，之后190.2/sec
 
-
+ 
 ### 2.项目整体的架构
 
 
 ### 3.开发中遇到问题
+maven的gav写错
 String用==判断相等
 config类上忘写@Configuration注解
-utf-8写成urf-8
+utf-8写错写成urf-8
