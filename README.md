@@ -81,17 +81,26 @@ https://blog.csdn.net/chentyit/article/details/101193838
 
 
 #### 项目完善 
-spring security
+##### spring security
 
 权限管理：管理员、版主、普通用户
 
 功能管理：置顶、加精、删除
 
-Redis
+##### Redis
 
 UV DAU统计
 
-性能
+##### QUARTZ
+
+定时任务，计算帖子热度
+
+##### 性能提升
+
+增加缓存
+
+压测工具
+
 
 ### 2.项目整体的架构
 

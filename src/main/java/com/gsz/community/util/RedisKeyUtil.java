@@ -19,8 +19,13 @@ public class RedisKeyUtil {
     //用户缓存
     private static final String PREFIX_USER = "user";
 
+    //数据统计 uv dau
     private static final String PREFIX_UV = "uv";
     private static final String PREFIX_DAU = "dau";
+
+    //保存修改过的帖子
+    //方便计算帖子的热度
+    private static final String PREFIX_POST = "post";
 
 
     // 生成某个实体的赞的key
@@ -84,6 +89,12 @@ public class RedisKeyUtil {
 
     public static String getDAUKey(String sdate, String edate){
         return PREFIX_DAU + SPLIT + sdate + SPLIT + edate;
+    }
+
+    //帖子分数的key
+    public static String getPostScoreKey()
+    {
+        return PREFIX_POST + SPLIT + "score";
     }
 
 }
