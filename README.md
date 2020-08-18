@@ -1,50 +1,77 @@
 # community-nowcoder
 
-来源：[牛客网项目](https://www.nowcoder.com/courses/semester/senior)
+项目来源：[牛客网项目](https://www.nowcoder.com/courses/semester/senior)
 
-### 0.项目使用框架
+## 0.项目使用框架
 ![系统图](https://s1.ax1x.com/2020/08/19/dMIkVO.png)
 
 
-### 1.项目实现的功能
-#### 用户
+## 1.项目实现的功能
+### 1.1 用户相关
+### 1.2 帖子相关
+### 1.3 日志记录
+### 1.4 性能提升
+### 1.5 系统通知
+### 1.6 帖子搜索
+### 1.7 项目完善 
+
+### 2.开发中遇到问题
+maven的gav写错，有些不同版本的包不兼容
+
+String用==判断相等吗，导致了条件永远不执行的bug
+
+Config类上忘写@Configuration注解
+
+utf-8写错写成urf-8
+
+jdk版本问题，最开始用了14，发现和搜索引擎的包冲突，后修改为8
+
+### 1.1 用户相关
 
 用户注册、邮件发送、账号激活
 
 用户登录、验证码、设置cookie、用户退出
 
-修改头像、修改密码
-
-个人主页
+个人主页、头像修改、密码修改
 
 网页菜单登录状态变化、网页访问登录状态限制
 
-#### 帖子
+### 1.2 帖子相关
 
 发布帖子、敏感词过滤
 
-帖子列表、帖子信息
+帖子列表、帖子详情
 
-加载评论、增加评论
+评论列表、新增评论
 
-私信列表、私信发送
+私信列表、发送私信
 
-#### 日志
+### 1.3 日志记录
 
-统一处理异常、记录日志（AOP）
+统一处理异常
 
-#### Redis
-内存型数据库
+记录日志（AOP）
 
-点赞、关注
+### 1.4 性能提升
+Redis
+
+实现点赞、关注的功能
 
 优化登录流程：验证码、登录凭证、缓存用户信息
 
-#### Kafka
+统计网站的UV、DAU
 
-消息队列服务器
+Caffeine
 
-评论/点赞/关注后，生产者消费者模式，发布通知
+增加缓存，在查询帖子总数/查询帖子列表时，加入一级缓存
+
+使用JMeter进行压力测试，吞吐量100.5/sec --> 190.2/sec
+
+### 1.5 系统通知
+
+kafka
+
+评论/点赞/关注，使用生产者消费者模式，向用户发送系统通知
 
 项目启动之前必须先启动kafka，而kafka启动过程比较繁琐
 
@@ -66,13 +93,12 @@ bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
 
 服务打开之后就可以在springboot中调用
 
-#### ElasticSearch
+### 1.6 帖子搜索
+ElasticSearch
 
 使用之前需要安装中文分词插件ik https://github.com/medcl/elasticsearch-analysis-ik
 
-服务启动之前需要启动ElasticSearch服务器
-
-Postman作为工具学习ElasticSearch的使用
+使用Postman作为工具学习ElasticSearch的使用
 
 实现搜索引擎，通过关键词搜索
 
@@ -81,38 +107,22 @@ Postman作为工具学习ElasticSearch的使用
 搜索引擎的版本和JDK版本冲突
 https://blog.csdn.net/chentyit/article/details/101193838
 
-
-#### 项目完善 
-##### spring security
+### 1.7 项目完善 
+#### 用户权限
+spring security
 
 权限管理：管理员、版主、普通用户
 
 功能管理：置顶、加精、删除
 
-##### Redis
+#### 帖子排名
+QUARTZ
 
-UV DAU统计
+定时任务，根据公式计算帖子热度
 
-##### QUARTZ
+维护列表，仅更新近期修改过的帖子的分数
 
-定时任务，计算帖子热度
-
-##### 性能提升
-
-增加缓存 Caffeine，在查询帖子总数/查询帖子列表时，加入一级缓存
-
-压力测试 JMeter 使用缓存之前吞吐量100.5/sec，之后190.2/sec
-
-##### 项目监控
+#### 项目监控
 Spring Boot Actuator
 
 页面很粗糙，本以为是带各种图表的监控。。注意需要加上访问权限。
-
-
-### 3.开发中遇到问题
-maven的gav写错，不同包版本不兼容
-String用==判断相等
-Config类上忘写@Configuration注解
-utf-8写错写成urf-8
-不同包版本之间的兼容问题
-jdk版本问题
