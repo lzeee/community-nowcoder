@@ -3,7 +3,7 @@
 来源：[牛客网项目](https://www.nowcoder.com/courses/semester/senior)
 
 ### 0.项目使用框架
-![系统图](https://imgchr.com/i/dMIkVO)
+![系统图](https://s1.ax1x.com/2020/08/19/dMIkVO.png)
 
 
 ### 1.项目实现的功能
