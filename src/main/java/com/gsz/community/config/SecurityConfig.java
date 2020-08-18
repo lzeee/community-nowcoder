@@ -57,7 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                         "/discuss/delete",
                         "/data/uv",
                         "/data/dau",
-                        "/data"
+                        "/data",
+                        "/actuator/**"
                 )
                 .hasAnyAuthority(
                         AUTHORITY_ADMIN

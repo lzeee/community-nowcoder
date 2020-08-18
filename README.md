@@ -1,8 +1,10 @@
 # community-nowcoder
 
-来源：[牛客网](https://www.nowcoder.com/courses/semester/senior)
+来源：[牛客网项目](https://www.nowcoder.com/courses/semester/senior)
 
-### 0.项目使用的框架
+### 0.项目使用框架
+![系统图](https://imgchr.com/i/dMIkVO)
+
 
 ### 1.项目实现的功能
 #### 用户
@@ -101,12 +103,16 @@ UV DAU统计
 
 压力测试 JMeter 使用缓存之前吞吐量100.5/sec，之后190.2/sec
 
- 
-### 2.项目整体的架构
+##### 项目监控
+Spring Boot Actuator
+
+页面很粗糙，本以为是带各种图表的监控。。注意需要加上访问权限。
 
 
 ### 3.开发中遇到问题
-maven的gav写错
+maven的gav写错，不同包版本不兼容
 String用==判断相等
-config类上忘写@Configuration注解
+Config类上忘写@Configuration注解
 utf-8写错写成urf-8
+不同包版本之间的兼容问题
+jdk版本问题
