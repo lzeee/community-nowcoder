@@ -2,7 +2,7 @@
 - [项目概览](#项目概览)  
 - [项目使用框架](#项目使用框架)  
 - [项目实现功能](#项目实现功能)  
-  - [Background](#background) 
+  - [用户相关](##用户相关) 
   - [Design inspirations](#design-inspirations) 
   - [Innovation point](#innovation-point)  
   - [Developmental vision](#developmental-vision) 
@@ -17,9 +17,9 @@
 # 项目使用框架
 ![系统图](https://s1.ax1x.com/2020/08/19/dMIkVO.png)
 
-# 项目实现的功能
+# 项目实现功能
 
-## 2.1 用户相关
+## 用户相关
 
 用户注册、邮件发送、账号激活
 
