@@ -1,7 +1,18 @@
-# community-nowcoder
+[一、项目概览](#项目概览)
+
+[二、项目使用框架](#标题two)
+
+## 1. subtitle1
+xxx
+## 2. subtitle2
+
+# 项目概览 
+
+community-nowcoder
 
 项目来源：[牛客网项目](https://www.nowcoder.com/courses/semester/senior)
 
+# 项目概览 
 ## 0.项目使用框架
 ![系统图](https://s1.ax1x.com/2020/08/19/dMIkVO.png)
 
@@ -12,8 +23,7 @@
 ### 1.3 日志记录
 ### 1.4 性能提升
 ### 1.5 系统通知
-### 1.6 帖子搜索
-### 1.7 项目完善 
+### 1.6 项目完善 
 
 ### 2.开发中遇到问题
 maven的gav写错，有些不同版本的包不兼容
@@ -25,6 +35,9 @@ Config类上忘写@Configuration注解
 utf-8写错写成urf-8
 
 jdk版本问题，最开始用了14，发现和搜索引擎的包冲突，后修改为8
+
+
+<h2 id="1">1.语法示例</h2>
 
 ### 1.1 用户相关
 
@@ -45,6 +58,21 @@ jdk版本问题，最开始用了14，发现和搜索引擎的包冲突，后修
 评论列表、新增评论
 
 私信列表、发送私信
+
+帖子搜索
+
+ElasticSearch
+
+使用之前需要安装中文分词插件ik https://github.com/medcl/elasticsearch-analysis-ik
+
+使用Postman作为工具学习ElasticSearch的使用
+
+实现搜索引擎，通过关键词搜索
+
+发布帖子时，使用kafka将新的帖子同步到搜索引擎中
+
+搜索引擎的版本和JDK版本冲突
+https://blog.csdn.net/chentyit/article/details/101193838
 
 ### 1.3 日志记录
 
@@ -93,21 +121,7 @@ bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
 
 服务打开之后就可以在springboot中调用
 
-### 1.6 帖子搜索
-ElasticSearch
-
-使用之前需要安装中文分词插件ik https://github.com/medcl/elasticsearch-analysis-ik
-
-使用Postman作为工具学习ElasticSearch的使用
-
-实现搜索引擎，通过关键词搜索
-
-发布帖子时，使用kafka将新的帖子同步到搜索引擎中
-
-搜索引擎的版本和JDK版本冲突
-https://blog.csdn.net/chentyit/article/details/101193838
-
-### 1.7 项目完善 
+### 1.6 项目完善 
 #### 用户权限
 spring security
 
