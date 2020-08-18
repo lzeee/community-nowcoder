@@ -3,9 +3,11 @@
 - [项目使用框架](#项目使用框架)  
 - [项目实现功能](#项目实现功能)  
   - [用户相关](#用户相关) 
-  - [Design inspirations](#design-inspirations) 
-  - [Innovation point](#innovation-point)  
-  - [Developmental vision](#developmental-vision) 
+  - [帖子相关](#帖子相关) 
+  - [日志记录](#日志记录)  
+  - [系统通知](#系统通知) 
+  - [性能提升](#性能提升) 
+  - [项目完善](#项目完善) 
 - [开发遇到问题](#开发遇到问题) 
  
 ---
@@ -14,8 +16,15 @@
 
 项目来源：[牛客网项目](https://www.nowcoder.com/courses/semester/senior)
 
+项目内容：
+
+---
+
 # 项目使用框架
 ![系统图](https://s1.ax1x.com/2020/08/19/dMIkVO.png)
+
+
+---
 
 # 项目实现功能
 
@@ -29,15 +38,11 @@
 
 网页菜单登录状态变化、网页访问登录状态限制
 
-## 2.2 帖子相关
+## 帖子相关
 
-发布帖子、敏感词过滤
+发布帖子、敏感词过滤、帖子列表、帖子详情
 
-帖子列表、帖子详情
-
-评论列表、新增评论
-
-私信列表、发送私信
+评论列表、新增评论、私信列表、发送私信
 
 帖子搜索
 
@@ -54,28 +59,13 @@ ElasticSearch
 搜索引擎的版本和JDK版本冲突
 https://blog.csdn.net/chentyit/article/details/101193838
 
-## 2.3 日志记录
+## 日志记录
 
 统一处理异常
 
 记录日志（AOP）
 
-## 2.4 性能提升
-Redis
-
-实现点赞、关注的功能
-
-优化登录流程：验证码、登录凭证、缓存用户信息
-
-统计网站的UV、DAU
-
-Caffeine
-
-增加缓存，在查询帖子总数/查询帖子列表时，加入一级缓存
-
-使用JMeter进行压力测试，吞吐量100.5/sec --> 190.2/sec
-
-## 2.5 系统通知
+## 系统通知
 
 kafka
 
@@ -101,7 +91,22 @@ bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
 
 服务打开之后就可以在springboot中调用
 
-## 2.6 项目完善 
+## 性能提升
+Redis
+
+实现点赞、关注的功能
+
+优化登录流程：验证码、登录凭证、缓存用户信息
+
+统计网站的UV、DAU
+
+Caffeine
+
+增加缓存，在查询帖子总数/查询帖子列表时，加入一级缓存
+
+使用JMeter进行压力测试，吞吐量100.5/sec --> 190.2/sec
+
+## 项目完善 
 ### 用户权限
 spring security
 
@@ -120,6 +125,8 @@ QUARTZ
 Spring Boot Actuator
 
 页面很粗糙，本以为是带各种图表的监控。。注意需要加上访问权限。
+
+---
 
 # 开发遇到问题
 maven的gav写错，有些不同版本的包不兼容
