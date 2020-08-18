@@ -2,7 +2,7 @@
 - [项目概览](#项目概览)  
 - [项目使用框架](#项目使用框架)  
 - [项目实现功能](#项目实现功能)  
-  - [用户相关](##用户相关) 
+  - [用户相关](#用户相关) 
   - [Design inspirations](#design-inspirations) 
   - [Innovation point](#innovation-point)  
   - [Developmental vision](#developmental-vision) 
@@ -121,7 +121,7 @@ Spring Boot Actuator
 
 页面很粗糙，本以为是带各种图表的监控。。注意需要加上访问权限。
 
-#3.开发遇到问题
+# 开发遇到问题
 maven的gav写错，有些不同版本的包不兼容
 
 String用==判断相等吗，导致了条件永远不执行的bug
