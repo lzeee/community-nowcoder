@@ -1,23 +1,23 @@
-#目录
-
-[0.项目概览](#0.项目概览)
-
-[1.项目使用框架](#1.项目使用框架)
-
-[2.项目实现功能](#2.项目实现功能)
-
-[3.项目使用框架](#3.开发遇到问题)
-
+# 目录
+- [项目概览](#项目概览)  
+- [项目使用框架](#项目使用框架)  
+- [项目实现功能](#项目实现功能)  
+  - [Background](#background) 
+  - [Design inspirations](#design-inspirations) 
+  - [Innovation point](#innovation-point)  
+  - [Developmental vision](#developmental-vision) 
+- [开发遇到问题](#开发遇到问题) 
+ 
 ---
 
-#0.项目概览 
+# 项目概览 
 
 项目来源：[牛客网项目](https://www.nowcoder.com/courses/semester/senior)
 
-#1.项目使用框架
+# 项目使用框架
 ![系统图](https://s1.ax1x.com/2020/08/19/dMIkVO.png)
 
-#2.项目实现的功能
+# 项目实现的功能
 
 ## 2.1 用户相关
 
