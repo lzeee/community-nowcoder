@@ -136,7 +136,7 @@ Spring Boot Actuator
 # 开发遇到问题
 maven的gav写错，有些不同版本的包不兼容
 
-String用==判断相等吗，导致了条件永远不执行的bug
+String用==判断相等，导致了该条件永远不执行的bug
 
 Config类上忘写@Configuration注解
 
