@@ -168,7 +168,7 @@ public class UserService implements CommunityConstant {
             map.put("passwordMsg", "密码不正确!");
             return map;
         }
-        //这里少了一步，如果已经有ticket呢？？
+        //这里少了一步，如果已经有ticket
         //没有任何问题，登录成功
         //生成登录凭证
         LoginTicket loginTicket = new LoginTicket();
@@ -226,7 +226,6 @@ public class UserService implements CommunityConstant {
     public User findUserByName(String username){
         return userMapper.selectByName(username);
     }
-
 
     public Collection<? extends GrantedAuthority> getAuthorities(int userId) {
         User user = this.findUserById(userId);

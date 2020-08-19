@@ -14,15 +14,18 @@
 
 # 项目概览 
 
-项目来源：[牛客网项目](https://www.nowcoder.com/courses/semester/senior)
+项目来源：
 
-项目内容：
+[牛客网项目](https://www.nowcoder.com/courses/semester/senior)
+
+项目内容：模仿实现牛客网的论坛网站，实现用户的注册、登录、发帖等功能。
 
 ---
 
 # 项目使用框架
-![系统图](https://s1.ax1x.com/2020/08/19/dMIkVO.png)
+主要是Spring Boot、SSM（Spring、Spring MVC、MyBatis）、Redis、Kafka、Elasticsearch
 
+![系统图](https://s1.ax1x.com/2020/08/19/dMIkVO.png)
 
 ---
 
@@ -50,11 +53,11 @@ ElasticSearch
 
 使用之前需要安装中文分词插件ik https://github.com/medcl/elasticsearch-analysis-ik
 
-使用Postman作为工具学习ElasticSearch的使用
+使用Postman学习ElasticSearch的使用
 
 实现搜索引擎，通过关键词搜索
 
-发布帖子时，使用kafka将新的帖子同步到搜索引擎中
+发布帖子时，使用kafka处理事件，将新帖子同步到搜索引擎中
 
 搜索引擎的版本和JDK版本冲突
 https://blog.csdn.net/chentyit/article/details/101193838
@@ -102,13 +105,13 @@ Redis
 
 Caffeine
 
-增加缓存，在查询帖子总数/查询帖子列表时，加入一级缓存
+增加缓存，在查询帖子总数/查询帖子列表时，加入Caffeine缓存
 
 使用JMeter进行压力测试，吞吐量100.5/sec --> 190.2/sec
 
 ## 项目完善 
 ### 用户权限
-spring security
+Spring Security
 
 权限管理：管理员、版主、普通用户
 
@@ -124,7 +127,9 @@ QUARTZ
 ### 项目监控
 Spring Boot Actuator
 
-页面很粗糙，本以为是带各种图表的监控。。注意需要加上访问权限。
+页面就是一个json，本以为是带各种图表的监控。。
+
+注意的是需要加上访问权限
 
 ---
 
@@ -137,4 +142,4 @@ Config类上忘写@Configuration注解
 
 utf-8写错写成urf-8
 
-jdk版本问题，最开始用了14，发现和搜索引擎的包冲突，后修改为8
+jdk版本问题，最开始用了14，发现和搜索引擎的包冲突，后修改为jdk8
